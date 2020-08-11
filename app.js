@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
   host     : 'l',
   user     : 'root',
   database : 'users',
-  password : '1Million123'
+  password : ''
 });
 
 app.get("/", function(req, res){
