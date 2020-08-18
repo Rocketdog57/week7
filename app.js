@@ -8,30 +8,30 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"));
 
 var connection = mysql.createConnection({
-  host     : 'l',
+  host     : 'localhost',
   user     : 'root',
   database : 'users',
-  password : ''
+  password : '1Million123'
 });
 
 app.get("/", function(req, res){
-    // Find count of users in DB
-    var q = "SELECT PersonID AS Email FROM users";
+    // Find email in DB
+    var q = "SELECT Email AS emails FROM users";
     connection.query(q, function(err, results){
         if(err) throw err;
-        var count = results[0].count; 
-        res.render("home", {PersonID: Email});
+        var email= results[0].Email; 
+        res.render("home", {emails: Email});
     });
 });
 
 app.post("/register", function(req, res){
-    var person = {
+    var email = {
         email: req.body.email
     };
-    connection.query('INSERT INTO users SET ?', person, function(err, result) {
+    connection.query('INSERT INTO users SET ?', email, function(err, result) {
         if (err) throw err;
         res.redirect("/");
-    });
+     });
 });
 
 app.listen(8080, function(){
